@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<center>
+    <div class="create-article">
+        <h2>הוסף מסלול משלך</h2>
+        <form class="site-form" action="{% url 'articles:create' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <body dir=rtl>
+            שם המסלול:{{form.title}}<br>
+            אזור:{{form.area}}<br>
+            אורך המסלול בק"מ:{{form.len1}}<br>
+            איך מגיעים?<br>
+            {{form.howto}}:<br>
+            תאור המסלול:<br>{{form.body}}<br>
+            מילות מפתח באנגלית:{{form.slug}}<br>
+            תמונה:{{form.thumb}}<br>
+            <input type="submit" value="הוסף מסלול">
+            </body>
+        </form>
+    </div>
+    </center>
+{% endblock %}

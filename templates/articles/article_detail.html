@@ -1,0 +1,62 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<center>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ article.title }} {% endblock title %}</h1>
+        <p class=" text-muted">{{ article.author }} | {{ article.created_on }}</p>
+        <p>אורך המסלול: {{ article.len1}} ק"מ</p>
+          <p>Area:{{article.area}}</p>
+      </div>
+    </div>
+    <img src="{{article.thumb.url}}"><br>
+      <Font size="6">
+          איך מגיעים?<br></Font></b>
+      <font size="4">{{article.howto}}</font><br>
+            <Font size="6">
+          פרטי המסלול<br></Font></b>
+      <font size="4">{{article.body}}</font>
+
+    <div class="grid2">
+
+        <h2>תגובות {{ comments.count }}</h2>
+
+        {% for comment in comments %}
+        <div class="comment-item">
+        <div class="grid2" style="padding: 15px;">
+          <p class="font-weight-bold"><font size="3">
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span></font>
+          </p>
+          <font color="darkblue" size="4"><b>
+          {{ comment.body | linebreaks }}
+            </font></b>
+        </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          תגובתך ממתינה לאישור
+        </div>
+        {% else %}
+        <h3>הוסף תגובה</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>  </center>
+{% endblock %}

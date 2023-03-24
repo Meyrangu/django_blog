@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<center>
+<head>
+    <meta charset="UTF-8">
+    <title>Article list</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+background-color: #6A8DE1;
+  border: 15px solid #acc2f7;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.grid2 {
+  width: 700px;
+  mergin-left:auto;
+  mergin-right:auto;
+  border: 5px;
+  grid-template-columns: auto auto auto;
+  padding: 5px;
+}
+.comment-item {
+background-color: #6A8DE1;
+  border: 5px solid #acc2f7;
+  padding: 5px;
+  font-size: 7px;
+  text-align: center;
+}
+
+</style>
+
+</head>
+<body dir="rtl">
+    <div class="wrapper">
+        <a href="{% url 'home' %}"><img src="{%static 'logo.png'%}" width="400" height="160"></center></a>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                {{user.username}} שלום
+                <li>
+                    <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                        <button type="submit">התנתק</button>
+                    </form>
+                </li>
+                <li><button><a href="{% url 'articles:create' %}">הוסף מסלול חדש</a> </button></li>
+                {% else %}
+                <li><a href="{% url 'accounts:login' %}"><button>התחבר</button></a> </li>
+                <li><a href="{% url 'accounts:signup' %}"><button>הירשם</button></a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+        </center>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

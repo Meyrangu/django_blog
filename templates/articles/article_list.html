@@ -1,0 +1,17 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<center>
+    <h1>מסלולי טיול</h1>
+    <div class="grid-container">
+    {% for article in articles %}
+        <div class="grid-item">
+            <h2><a href="{% url 'articles:detail' slug=article.slug %}"><img src="{{article.thumb.url}}" height="240" width="400"><br> {{article.title}}</h2>
+            <p><font size="4">אורך המסלול:{{article.len1}} ק"מ<br>
+            Area:{{article.area}}</p>
+            </a></font>
+        </div>
+        {% endfor %}
+    </div>
+
+    </center>
+{% endblock %}
